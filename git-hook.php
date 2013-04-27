@@ -31,7 +31,7 @@ try {
 }
 
 if (!isset($json->updated_at)) {
-  file_put_contents("git-hook.txt", "BAD TIME");
+  file_put_contents("git-hook.txt", "BAD TIME" . print_r($json));
   exit;
 }
 
