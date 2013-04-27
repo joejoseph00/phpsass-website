@@ -34,10 +34,12 @@ if ($diff > 600) {
   exit;
 }
 
+file_put_contents("git-hook.txt", "Updating {$payload->repository->name} at {time()}\n");
+
 # should be good to pull now.
 if ($payload->repository->name == 'phpsass-website') {
-  `git pull > git-hook.txt`;
+  `git pull >> git-hook.txt`;
 }
 else {
-  `git submodule update > git-hook.txt`;
+  `git submodule update >> git-hook.txt`;
 }
