@@ -26,12 +26,12 @@ $info = file_get_contents("https://api.github.com/repos/richthegeek/phpsass-webs
 try {
   $json = json_decode($info);
 } catch (Exception $e) {
-  file_put_contents("git-hook.txt", "BAD INFO");
+  file_put_contents("git-hook.txt", "BAD INFO\n$info");
   exit;
 }
 
 if (!isset($json->updated_at)) {
-  file_put_contents("git-hook.txt", "BAD TIME" . print_r($json));
+  file_put_contents("git-hook.txt", "BAD TIME\n" . print_r($json, true));
   exit;
 }
 
@@ -40,7 +40,7 @@ $updated = strtotime($json->updated_at);
 $diff = abs(time() - $updated);
 
 if ($diff > 600) {
-  file_put_contents("git-hook.txt", "BAD DIFF");
+  file_put_contents("git-hook.txt", "BAD DIFF\n" . print_r($json, true));
   exit;
 }
 
