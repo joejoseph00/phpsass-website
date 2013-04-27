@@ -1,5 +1,7 @@
 <?php
 
+file_put_contents("git-hook.txt", time());
+
 # right format...
 if (!isset($_REQUEST['payload'])) {
   file_put_contents("git-hook.txt", "NO PAYLOAD");
