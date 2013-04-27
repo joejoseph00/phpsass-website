@@ -1,0 +1,7 @@
+@mixin tests {
+  opacity: 1;   
+}
+
+div {
+    @include test;
+}

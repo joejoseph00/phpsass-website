@@ -1,0 +1,62 @@
+@import url(http://fonts.googleapis.com/css?family=Lato:400,700);
+
+body {
+	width: 800px;
+	margin: 0 auto;
+	font-family: Lato;
+}
+
+h1 {
+	background: #222;
+	color: #888;
+	padding: 0px;
+	margin: 50px auto;
+	width: 100px !important;
+	height: 100px;
+	line-height: 100px;
+	text-indent: 9px;
+	border-radius: 100px;
+	border: 7px double #fff;
+	font-size: 43px;
+	text-align: left;
+
+
+}
+h1 em {
+	color: #fff;
+	font-style: normal;
+	padding-right: 14px;
+}
+
+
+section {
+	display: block;
+	overflow: hidden;
+	clear: both;
+	padding-bottom: 20px;
+}
+
+section h2 {
+	width: 250px;
+	float: left;
+	margin: 16px 0 0;
+	padding: 10px;
+	font-size: 1.2em;
+	color: #fff;
+	background: #444;
+}
+
+section > * {
+	width: 500px;
+	float: right;
+	color: #444;
+}
+
+section ul {
+	width: 480px;
+}
+
+
+a {
+	color: inherit;
+}

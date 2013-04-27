@@ -1,0 +1,3 @@
+[submodule "try/phpsass"]
+	path = try/phpsass
+	url = git@github.com:richthegeek/phpsass.git

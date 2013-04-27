@@ -1,0 +1,142 @@
+<html>
+<head>
+	<title>Editor</title>
+	<script type="text/javascript" src="assets/jquery.min.js"></script>
+	<script type="text/javascript" src="assets/src/ace.js"></script>
+	<script type="text/javascript" src="assets/src/theme-pastel_on_dark.js"></script>
+	<script type="text/javascript" src="assets/src/mode-scss.js"></script>
+
+	<script type="text/javascript">
+	var editors = {},
+		sessions = {},
+		font_size = 16,
+		last_key = 0;
+
+	$(function() {
+
+		add_editor('editor', 'scss')
+		add_editor('phpsass', 'scss')
+		add_editor('ruby', 'scss')
+
+		$(document).keypress(function(e) {
+			if (e.shiftKey) {
+				if (e.keyCode == 43) {
+					font_size += 2;
+				}
+				else if (e.keyCode == 45 || e.keyCode == 95) {
+					font_size -= 2
+				}
+				else if (e.keyCode == 67) {
+					editors.ruby.getSession().setValue('Loading . . .')
+					$.post('proxy.php', {
+						destination: 'http://sass-lang.com/try.html',
+						syntax: 'scss',
+						input: editors.editor.getSession().getValue()
+					}, function(data) {
+						editors.ruby.getSession().setValue(data)
+					})
+
+					editors.phpsass.getSession().setValue('Loading . . .')
+					$.post('phpsass.php', { input: editors.editor.getSession().getValue() }, function(data) {
+						editors.phpsass.getSession().setValue(data)
+					})
+				}
+				else {
+					return true;
+				}
+				for (var i in editors) {
+					editors[i].setFontSize(font_size)
+				}
+				return false;
+			}
+		})
+	})
+
+	function add_editor(id, syntax) {
+		var editor = ace.edit(id);
+		var session = editor.getSession();
+
+		editor.setTheme('ace/theme/pastel_on_dark')
+		editor.setPrintMarginColumn(-1)
+		editor.setFontSize(font_size)
+
+		var syntax = require('ace/mode/' + syntax).Mode;
+		session.setMode(new syntax())
+
+		editors[id] = editor
+		sessions[id] = editor
+	}
+	</script>
+
+	<style type="text/css">
+		#editor {
+			position: absolute;
+			top: 0;
+			bottom: 0;
+			left: 0;
+			width: 60%;
+		}
+
+		#phpsass {
+			position: absolute;
+			top: 0;
+			right: 0;
+			width: 40%;
+			height: 50%;
+		}
+		#phpsass::after {
+			content: 'PHPSass';
+			position: absolute;
+			z-index: 999;
+			bottom: 0;
+			right: 0;
+			padding: 7px 12px;
+			font-weight: bold;
+			color: #fff;
+			background: #38f;
+			border-radius: 10px 0 0;
+
+		}
+
+		#ruby {
+			position: absolute;
+			bottom: 0;
+			right: 0;
+			width: 40%;
+			height: 50%;
+		}
+		#ruby::after {
+			content: 'Ruby';
+			position: absolute;
+			z-index: 999;
+			bottom: 0;
+			right: 0;
+			padding: 7px 12px;
+			font-weight: bold;
+			color: #fff;
+			background: #CE4DD6;
+			border-radius: 10px 0 0;
+
+		}
+
+	</style>
+</head>
+<body>
+
+<div id="editor">// Press shift+C to compile
+$red: #f00;
+
+body {
+	background: $red;
+}
+</div>
+<div id="phpsass">This output is produced by the PHPSass compiler.
+
+See PHPSass.com for information on the PHPSass compiler!</div>
+<div id="ruby">This output is produced by the Ruby compiler, version 3.2.0.aplpha.91
+
+Go to Sass-lang.com for information on the SASS and SCSS languages.</div>
+
+
+</body>
+</html>
