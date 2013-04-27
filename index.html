@@ -2,43 +2,63 @@
 <html>
 <head>
 	<title>PHPSass - A PHP compiler for Sass</title>
-	<link rel="stylesheet" href="assets/style.css" />
+	<link rel="stylesheet" href="sass.php/assets/style.scss" />
+	<script type="text/javascript" src="http://bit.ly/jqueryjs"></script>
+	<script type="text/javascript">
+	jQuery(function($) {
+		$.getJSON('https://api.github.com/repos/richthegeek/phpsass/commits', function(info) {
+			commit = info.shift()
+			console.log(commit)
+			message = commit.commit.message
+			// if (message.length > 50)
+
+			link = $('<a />').attr('href', commit.html_url).text(commit.commit.message).addClass('latest-commit')
+			$('#status').append(link)
+		})
+	})
+	</script>
 </head>
 <body>
-	<h1><em>PHP</em>Sass</h1>
 
-	<section>
-		<h2>What is PHPSass?</h2>
-		<p>PHPSass is a PHP compiler for <a href="http://sass-lang.com/">SASS</a>, a popular CSS pre-processor language.</p>
-		<p>It is a fork of <a href="http://code.google.com/p/phamlp">PHamlP</a> that has been under active development since August 2011.</p>
-		<p>It is up-to-date with the v3.1.1.5 specification of SASS, and is tracking v3.2 development actively.</p>
-	</section>
+	<header>
+		<h1>PHPSass</h1>
+		<h2>A PHP compiler for SASS</h2>
 
-	<section>
-		<h2>Where can I download it?</h2>
-		<p>We host the code on Github: <a href="https://github.com/richthegeek/phpsass">github.com/richthegeek/phpsass</a></p>
-	</section>
+		<div id="status">
+			<a class="travis" href="https://secure.travis-ci.org/#!/richthegeek/phpsass"><img src="https://secure.travis-ci.org/richthegeek/phpsass.png" alt="build status"></a>
+		</div>
 
-	<section>
-		<h2>Try it out</h2>
-		<p>You can <a href="/try">try the PHPSass parser online</a> and compare it against the Ruby compiler <a href="/try">here.</a>
-	</section>
-	
-	<section>
-		<h2>Documentation</h2>
-		<p>None yet, although there is an implementing <a href="http://drupal.org/project/sassy">Drupal module</a> whose code covers everything that you need to know.</p>
-		<p>We *are* working on better documentation, and it will be on this website soon.</p>
-	</section>
+	</header>
 
-	<section>
-		<h2>Links</h2>
-		<ul>
-			<li><a href="https://github.com/richthegeek/phpsass">The github repository</a></li>
-			<li><a href="http://twitter.com/richthegeek">Richard Lyon - primary maintainer</a></li>
-			<li><a href="http://twitter.com/thefubhy">Sebastian Siemssen - primary maintainer</a></li>
-			<li><a href="http://twitter.com/snugug">Sam Richards - test coverage & framework</a></li>
-			<li><a href="http://twitter.com/phpsass"><b>PHPSass on twitter - new version notices, bug warnings, etc.</b></a></li>
-		</ul>
-	</section>
+	<div id="body">
+		<section id="what">
+			<p>
+				<b>PHPSass</b> is a compiler for <a href="http://sass-lang.com/">SASS</a> written in PHP for projects unwilling or unable to use Ruby.
+			</p>
+			
+			<p>
+				<b>SASS</b> is an extension of CSS3, adding <a href="http://sass-lang.com/#nesting">nested rules</a>,
+				<a href="http://sass-lang.com/#variables">variables</a>,
+				<a href="http://sass-lang.com/#mixins">mixins</a>, 
+				<a href="http://sass-lang.com/#extend">selector inheritance</a>,
+				and <a href="http://sass-lang.com/docs/yardoc/file.SASS_REFERENCE.html">more</a>.
+			</p>
+
+			<p>
+				<b>PHPSass</b>Aims for feature-parity with the stable release of the Ruby compiler, but often lags behind or introduces additional bugs.
+				As such, if you <i>can</i> use the Ruby compiler to satisfy your requirements, we recommend that you do so. If you can't then
+				<a href="https://github.com/richthegeek/phpsass/issues">file an issue</a> on our <a href="https://github.com/richthegeek/phpsass">GitHub</a> repo.
+			</p>
+		</section>
+
+		<section id="links">
+			<a class="link-github" href="https://github.com/richthegeek/phpsass">GitHub repository</a>
+			<a class="link-download" href="https://github.com/richthegeek/phpsass/archive/master.zip">Download latest version</a>
+			<a class="link-twitter" href="http://twitter.com/phpsass">PHPSass twitter account</a>
+			<a class="link-donate" href="https://www.gittip.com/richthegeek/">Donate to PHPSass development</a>
+			<a class="link-try" href="/try">Try it out online</a>
+
+		</section>
+	</div>
 </body>
 </html>
