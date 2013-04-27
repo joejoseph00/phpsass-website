@@ -36,8 +36,8 @@ if ($diff > 600) {
 
 # should be good to pull now.
 if ($payload->repository->name == 'phpsass-website') {
-  `git pull >> git-hook.txt`;
+  `git pull > git-hook.txt`;
 }
 else {
-  `git submodule update >> git-hook.txt`;
+  `git submodule update > git-hook.txt`;
 }
