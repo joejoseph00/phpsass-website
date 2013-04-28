@@ -8,10 +8,6 @@
 	jQuery(function($) {
 		$.getJSON('https://api.github.com/repos/richthegeek/phpsass/commits', function(info) {
 			commit = info.shift()
-			console.log(commit)
-			message = commit.commit.message
-			// if (message.length > 50)
-
 			link = $('<a />').attr('href', commit.html_url).text(commit.commit.message).addClass('latest-commit')
 			$('#status').append(link)
 		})
